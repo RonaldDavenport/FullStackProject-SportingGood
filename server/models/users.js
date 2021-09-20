@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Users.hasOne(order)
+      
       // define association here
     }
   };
