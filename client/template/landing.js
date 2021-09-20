@@ -1,5 +1,6 @@
-console.log("CONNECTED!")
-//CREATING A NEW USER
+console.log("connected!")
+
+//  CREATING A NEW USER
 const signUpbtn = document.querySelector(".signUp");
 const createNewUser = async () => {
     const url = "";
