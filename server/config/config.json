@@ -2,7 +2,7 @@
   "development": {
     "username": "",
     "password": null,
-    "database": "Elite-SportingGoods",
+    "database": "EliteSporingGoods",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
