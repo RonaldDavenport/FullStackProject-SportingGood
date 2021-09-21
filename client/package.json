@@ -9,8 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "nodemon": "^2.0.12"
   },
-  "devDependencies": {},
-  "description": ""
+  "description": "",
+  "javascript.validate.enable": false
 }
