@@ -27,3 +27,25 @@ const createNewUser = async () => {
     console.log(createUser)
 };
 signUpbtn.addEventListener("click", () => createNewUser())
+
+//Logging In Exsisting User
+const loginBtn = document.querySelector(".logIn")
+const exsitingUser = async () =>{
+    const url = "";
+    const userName = document.querySelector(".username").value;
+    const passWord = document.querySelector(".login_password").value;
+    const verify = {
+        //column username
+        //column password
+    };
+    const verifyUser = await fetch (url,{
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify(verifyUser),
+    });
+    console.log(verifyUser)
+    };
+loginBtn.addEventListener("click", () => exsitingUser() )
