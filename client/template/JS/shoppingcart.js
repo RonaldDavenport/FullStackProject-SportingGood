@@ -1,8 +1,8 @@
 console.log("Connected!")
+//TO VIEW ITEMS IN CART
 const viewBtn = document.querySelector(".view_cart");
-
-const cartUrl = ""
 const viewUserCart =  async () => {
+    const cartUrl = "http://localhost:3001/viewOrders"
     const getCart = await fetch (cartUrl, {
         method: 'POST',
         mode: "cors",
