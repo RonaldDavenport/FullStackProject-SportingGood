@@ -3,14 +3,18 @@ console.log("connected!")
 //  CREATING A NEW USER
 const signUpbtn = document.querySelector(".signUp");
 const createNewUser = async () => {
-    const url = "";
+    const url = "http://localhost:3001/createUser";
+    const newFname = document.querySelector(".fname").value;
     const newUserName = document.querySelector(".username").value;
+    const newPassword = document.querySelector(".password").value;
+    const newLname = document.querySelector(".lname").value;
+    const newEmail = document.querySelector(".email").value;
     const newUser = {
-        //columnName User Name
-        //columnName Password
-        //columnName First Name
-        //columnName Last Name
-        //columnName Email 
+        firstname : newFname,
+        lastname : newLname,
+        username : newUserName,
+        password :newPassword,
+        email : newEmail
     };
     const createUser = await fetch (url, {
         method: "POST",
