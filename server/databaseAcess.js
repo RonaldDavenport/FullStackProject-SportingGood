@@ -21,14 +21,15 @@ app.use(helmet());
 // const PORT = 3001
 
 
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
-app.use(express.static(path.join(__dirname, 'templates')));
+app.use("./template",express.static(path.join(__dirname, './template')));
 app.engine('html', es6Renderer);
+app.set('views', './template')
 app.set('view engine','html');
-app.set('views', 'templates')
+
+
 // app.set("views", path.join(__dirname, "templates"));
 
 app.get("/", (req, res) => {
@@ -48,12 +49,13 @@ app.get("/login", (req, res) => {
   
     // if there exists, send the error.
     if (bad_auth) {
-      return res.render("login", {
+       res.render('landing', {
+           locals: {bad_auth},
         error: "Invalid username or password",
       });
     } else {
       // else just render the login
-      return res.render("login");
+       res.render('landing', {locals: {bad_auth}});
     }
   });
 
@@ -62,7 +64,7 @@ app.get("/login", (req, res) => {
     let username = req.cookies.username;
   
     // render welcome page
-    return res.render("welcome", {
+    return res.render("home", {
       username,
     });
   });
@@ -85,10 +87,10 @@ app.get("/login", (req, res) => {
       // saving the data to the cookies
       res.cookie("username", username);
       // redirect
-      return res.redirect("/welcome");
+      return res.redirect("./home");
     } else {
       // redirect with a fail msg
-      return res.redirect("/login?msg=fail");
+      return res.redirect("landing?msg=fail");
     }
   });
 
