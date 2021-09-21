@@ -24,7 +24,7 @@ app.use(helmet());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
-app.use("./template",express.static(path.join(__dirname, './template')));
+app.use("/template",express.static(path.join(__dirname, 'template')));
 app.engine('html', es6Renderer);
 app.set('views', './template')
 app.set('view engine','html');
