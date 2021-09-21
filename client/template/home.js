@@ -1,5 +1,5 @@
 console.log("CONNECTED!")
-aliAPIKey = "dda73c3253msh3f701390ae30102p13d527jsn2f5972edd097"
+const aliAPIKey = process.env.aliAPIKey
 
 
 //SEARCHING FOR PRODUCTS USING API
@@ -24,16 +24,16 @@ const options = async () => {
   
 });
     const jsonItems = await getQuery.json();
-    console.table(jsonItems.data.searchResult.mods.itemList.content)
-    // for(item of jsonItems.data.searchResult.mods.itemList.content){
-    //     const itemName = document.createElement("h3")
-    //     const itemImg = document.createElement("img")
-    //     const productDiv = document.querySelector(".inventory")
-    //     itemImg.src = item.image
-    //     itemName.innerHTML = item.title
-    //     productDiv.append(itemName, itemImg)
+    console.table(jsonItems.data.searchResult.mods.itemList.content[0-20])
+    for(item of jsonItems.data.searchResult.mods.itemList.content){
+        const itemName = document.createElement("h3")
+        const itemImg = document.createElement("img")
+        const productDiv = document.querySelector(".inventory")
+        itemImg.src = item.image
+        itemName.innerHTML = item.title
+        productDiv.append(itemName, itemImg)
 
-    // }
+    }
 }
 
 
