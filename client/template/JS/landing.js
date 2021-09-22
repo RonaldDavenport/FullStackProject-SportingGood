@@ -49,3 +49,5 @@ const exsitingUser = async () =>{
     console.log(verifyUser)
     };
 loginBtn.addEventListener("click", () => exsitingUser() )
+
+//FORM FUNCTIONS

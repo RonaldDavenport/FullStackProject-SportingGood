@@ -55,6 +55,7 @@ const fillCart = async () => {
 };
 addBtn.addEventListener("click", () => fillCart())
 
+//NAVBAR FUNCTIONS
 $(document).ready(function () {
     $('.navbar-light .dmenu').hover(function () {
             $(this).find('.sm-menu').first().stop(true, true).slideDown(150);
