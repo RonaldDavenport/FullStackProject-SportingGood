@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser')
 const helmet = require("helmet")
 const path = require("path")
 const cors = require('cors')
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
 const es6Renderer = require('express-es6-template-engine');
 const { where } = require("sequelize")
 
@@ -27,7 +27,7 @@ app.use(helmet());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/client/template/JS",express.static(path.join(__dirname+ 'js')));
+app.use("/client/template/JS",express.static(path.join(__dirname, 'js')));
 app.engine('html', es6Renderer);
 app.set('view engine','html');
 app.set('views', path.join(__dirname, '../client/template'));
@@ -37,13 +37,14 @@ app.set('views', path.join(__dirname, '../client/template'));
 // app.set("views", path.join(__dirname, "templates"));
 
 app.get("/", (req, res) => {
+  res.render('landing')
     // check if user is logged in, by checking cookie
-    let username = req.cookies.username;
+    // let username = req.cookies.username;
   
-    // render the home page
-    return res.render('landing', {
-      username,
-    });
+    // // render the home page
+    //  res.render('landing', {
+    //   username,
+    // });
   });
   
 
@@ -139,9 +140,9 @@ app.post("/viewProducts/:Category", async (req,res)=>{
        {Category:req.params.Category}
       
     })
-    res.send(allProducts)
+    console.log(searchedProducts)
 
-    res.render('home',{locals: {searchedProducts:searchedProducts}});
+    res.render('home',{locals: {searchedProducts}});
   })
 
 
