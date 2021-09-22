@@ -12,6 +12,7 @@ const path = require("path")
 const cors = require('cors')
 const PORT = process.env.PORT || 3001;
 const es6Renderer = require('express-es6-template-engine');
+const { where } = require("sequelize")
 
 
 
@@ -125,13 +126,18 @@ app.post("/createUser", async (req,res)=>{
     
     
   
-app.post("/viewProducts", async (req,res)=>{
+app.post("/viewProducts/:Category", async (req,res)=>{
     const allProducts = await Products.findAll({
        attributes: [
            'Name',
            'Price',
            'Imageurl'
-       ]
+           
+
+       ],
+       where:
+       {Category:req.params.Category}
+      
     })
     res.send(allProducts)
 })
@@ -167,7 +173,7 @@ app.post("/deleteOrder/:id", async (req,res) =>{
     })
     res.send("Your order has been cancelled.")
 })
-app.post("/viewOrders/:id", async (req,res)=>{
+app.post("/viewOrders/:", async (req,res)=>{
     const viewOrder = await Orders.findAll(
         {
             include: [{
