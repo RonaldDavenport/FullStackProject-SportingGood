@@ -15,18 +15,18 @@ const productView = async () =>{
      ],
      body: JSON.stringify(allProducts)
 });
-    const jsonProducts = await allProducts.json();
-    console.log(jsonProducts)
-    for(product of jsonProducts){
-        const productContain = document.querySelector(".inventory");
-        const productName = document.createElement("h3");
-        const productImg = document.createElement("img");
-        const productPrice = document.createElement("h4");
-        productName.innerHTML = product.Name;
-        productImg.src = product.Imageurl;
-        productPrice.innerHTML = product.Price;
-        productContain.append(productName, productImg, productPrice);
-    };
+    // const jsonProducts = await allProducts.json();
+    // console.log(jsonProducts)
+    // for(product of jsonProducts){
+    //     const productContain = document.querySelector(".inventory");
+    //     const productName = document.createElement("h3");
+    //     const productImg = document.createElement("img");
+    //     const productPrice = document.createElement("h4");
+    //     productName.innerHTML = product.Name;
+    //     productImg.src = product.Imageurl;
+    //     productPrice.innerHTML = product.Price;
+    //     productContain.append(productName, productImg, productPrice);
+    // };
 };
     productView()
 
