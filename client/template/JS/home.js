@@ -1,20 +1,20 @@
 console.log("CONNECTED!")
 //PRODUCTS LISTED ON HOME PAGE
-const productView = async () =>{
-    productsURL = "http://localhost:3001/viewProducts";
-    const allProducts = await fetch (productsURL, {
-    method: 'POST',
-     mode: "cors",
-     headers: {
-        "Content-type": "application/json; charset=UTF-8",     
-  },
-     attributes: [
-        'Name',
-        'Price',
-        'Imageurl'
-     ],
-     body: JSON.stringify(allProducts)
-});
+// const productView = async () =>{
+//     const productsURL = "http://localhost:3001/viewProducts";
+//     const allProducts = await fetch (productsURL, {
+//     method: 'POST',
+//      mode: "cors",
+//      headers: {
+//         "Content-type": "application/json; charset=UTF-8",
+//   },
+//      attributes: [
+//         'Name',
+//         'Price',
+//         'Imageurl'
+//      ],
+//      body: JSON.stringify(allProducts)
+// });
     // const jsonProducts = await allProducts.json();
     // console.log(jsonProducts)
     // for(product of jsonProducts){
@@ -27,19 +27,18 @@ const productView = async () =>{
     //     productPrice.innerHTML = product.Price;
     //     productContain.append(productName, productImg, productPrice);
     // };
-};
-    productView()
-
+// };
+//     productView();
 //SEARCHING DATABASE FOR PRODUCTS
 // const searchBtn = document.querySelector(".searchBtn");
 // const productOptions = async () => {
 //     searchUrl = "http://localhost:3001/viewProducts"
 //     const searchValue = document.querySelector(".searchBar").value;
-//     const getQuery = await fetch (searchUrl, { 
+//     const getQuery = await fetch (searchUrl, {
 //      method: 'GET',
 //      mode: "cors",
 //      headers: {
-//         "Content-type": "application/json; charset=UTF-8",     
+//         "Content-type": "application/json; charset=UTF-8",
 //   },
 //      attributes: [`${searchValue}`],
 //      body: JSON.stringify(getQuery)
@@ -64,7 +63,6 @@ const productView = async () =>{
 //     };
 // };
 // searchBtn.addEventListener("click", () => options())
-
 // //ADDING PRODUCT TO CART
 // const addBtn = document.querySelector(".addToCart");
 // const fillCart = async () => {
@@ -84,7 +82,6 @@ const productView = async () =>{
 //         console.table(createOrder)
 // };
 // addBtn.addEventListener("click", () => fillCart())
-
 //NAVBAR FUNCTIONS
 // $(document).ready(function () {
 //     $('.navbar-light .dmenu').hover(function () {
