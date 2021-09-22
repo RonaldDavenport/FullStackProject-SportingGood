@@ -6,6 +6,7 @@ console.log(Users)
 console.log(Orders)
 console.log(Products)
 const express = require("express")
+const session = require("express-session")
 const cookieParser = require('cookie-parser')
 const helmet = require("helmet")
 const path = require("path")
@@ -20,6 +21,15 @@ const app = express();
 app.use(cors());
 app.use(cookieParser());
 app.use(helmet());
+app.use(session
+  ({
+    secret: "secret",
+    resave : false,
+    saveUninitialized: true,
+    cookie: {secure:false, maxAge:2592000}
+  }
+
+  ))
 // const bodyParser = require('body-parser')
 // const PORT = 3001
 
@@ -43,28 +53,53 @@ app.get("/", (req, res) => {
 
   });
 
-  app.get("/home",(req,res)=>{
-    res.render("home")
+  app.get("/home",  async (req,res)=>{
+
+    const allProducts = await Products.findAll({
+      attributes: [
+          'Name',
+          'Price',
+          'Imageurl'
+          
+
+      ]
+      
+     
+   })
+   console.log(allProducts)
+   // res.send(allProducts)
+
+   res.render('home', {
+     locals: {
+         allProducts:allProducts
+     }
+ });
+
+    // res.render("home")
   })
   
 app.get("/shoppingCart",(req,res)=>{
   res.render("shoppingCart")
 })
 
-// app.get("/login", (req, res) => {
-//     // check if there is a msg query
-//     let bad_auth = req.query.msg ? true : false;
-  
-//     // if there exists, send the error.
-//     if (bad_auth) {
-//        res.render('landing', {
-//         error: "Invalid username or password",
-//       });
-//     } else {
-//       // else just render the login
-//        res.render('landing');
-//     }
-//   });
+app.post("/login", async (req, res) => {
+    const {username,password}=req.body
+    const checkUser = await Users.findOne({
+      where:{
+        username,
+        password,
+      },
+    });
+    const userFound = checkUser.dataValues;
+    if(checkUser.dataValues){
+      req.session.user = userFound;
+      res.redirect("home")
+    } else {
+      res
+      .status(401)
+      .send("Try Again or Sign Up!")
+    }
+  });
 
   // app.get("/welcome", (req, res) => {
   //   // get the username
@@ -163,9 +198,14 @@ app.post("/viewProducts/:Category", async (req,res)=>{
        
       
     })
-    res.send(allProducts)
+    // res.send(allProducts)
 
-    res.render('home',{locals: {allProducts:allProducts}});
+    res.render('home', {
+      locals: {
+          allProducts:allProducts
+      }
+  });
+  console.log(allProducts)
   })
 app.post("/createOrder", async (req,res)=>{
     const {userId, productID, status}=req.body;
