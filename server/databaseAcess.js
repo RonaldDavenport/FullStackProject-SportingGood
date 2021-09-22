@@ -127,7 +127,7 @@ app.post("/createUser", async (req,res)=>{
     
   
 app.post("/viewProducts/:Category", async (req,res)=>{
-    const allProducts = await Products.findAll({
+    const searchedProducts = await Products.findAll({
        attributes: [
            'Name',
            'Price',
@@ -140,12 +140,34 @@ app.post("/viewProducts/:Category", async (req,res)=>{
       
     })
     res.send(allProducts)
-})
+
+    res.render('home',{locals: {searchedProducts:searchedProducts}});
+  })
+
+
+
+
+  app.post("/viewProducts", async (req,res)=>{
+    const allProducts = await Products.findAll({
+       attributes: [
+           'Name',
+           'Price',
+           'Imageurl'
+           
+
+       ]
+       
+      
+    })
+    res.send(allProducts)
+
+    res.render('home',{locals: {allProducts:allProducts}});
+  })
 app.post("/createOrder", async (req,res)=>{
-    const {userId,productID,status}=req.body
+    const {userId, productID, status}=req.body;
     const newOrder = await Orders.create({
-        userId,
-        productID,
+       userId,
+        productID:productID,
         status
 
     
@@ -173,7 +195,7 @@ app.post("/deleteOrder/:id", async (req,res) =>{
     })
     res.send("Your order has been cancelled.")
 })
-app.post("/viewOrders/:", async (req,res)=>{
+app.post("/viewOrders/:id", async (req,res)=>{
     const viewOrder = await Orders.findAll(
         {
             include: [{
@@ -186,6 +208,16 @@ app.post("/viewOrders/:", async (req,res)=>{
         }
     )
   res.send(viewOrder)
+})
+
+app.post("/deleteProduct/:id", async (req,res)=>{
+  const deleteProduct = await Products.destroy({
+    where:{
+      id:req.params.id,
+      Name:"Shooting Sleeve"
+    }
+  })
+  res.send("Product Deleted")
 })
 
 app.get('/setcookie', (req, res) => {
