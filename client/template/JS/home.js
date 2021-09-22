@@ -1,4 +1,35 @@
 console.log("CONNECTED!")
+//PRODUCTS LISTED ON HOME PAGE
+const productView = async () =>{
+    productsURL = "http://localhost:3001/viewProducts";
+    const allProducts = await fetch (productsURL, {
+    method: 'POST',
+     mode: "cors",
+     headers: {
+        "Content-type": "application/json; charset=UTF-8",     
+  },
+     attributes: [
+        'Name',
+        'Price',
+        'Imageurl'
+     ],
+     body: JSON.stringify(allProducts)
+});
+    const jsonProducts = await allProducts.json();
+    console.log(jsonProducts)
+    for(product of jsonProducts){
+        const productContain = document.querySelector(".inventory");
+        const productName = document.createElement("h3");
+        const productImg = document.createElement("img");
+        const productPrice = document.createElement("h4");
+        productName.innerHTML = product.Name;
+        productImg.src = product.Imageurl;
+        productPrice.innerHTML = product.Price;
+        productContain.append(productName, productImg, productPrice);
+    };
+};
+    productView()
+
 //SEARCHING DATABASE FOR PRODUCTS
 const searchBtn = document.querySelector(".searchBtn");
 const productOptions = async () => {
@@ -30,7 +61,6 @@ const productOptions = async () => {
         addToCart.className += ".addToCart";
         addToCart.name = "Add to Cart";
         productDiv.append(itemName, itemImg, itemPrice,addToCart);
-
     };
 };
 searchBtn.addEventListener("click", () => options())
