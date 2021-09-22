@@ -37,16 +37,19 @@ app.set('views', path.join(__dirname, '../client/template'));
 // app.set("views", path.join(__dirname, "templates"));
 
 app.get("/", (req, res) => {
-  res.render('landing')
-    // check if user is logged in, by checking cookie
-    // let username = req.cookies.username;
-  
-    // // render the home page
-    //  res.render('landing', {
-    //   username,
-    // });
+  res.render("landing",{
+    
+  })
+
   });
+
+  app.get("/home",(req,res)=>{
+    res.render("home")
+  })
   
+app.get("/shoppingCart",(req,res)=>{
+  res.render("shoppingCart")
+})
 
 // app.get("/login", (req, res) => {
 //     // check if there is a msg query
