@@ -61,4 +61,9 @@ const exsitingUser = async (e) =>{
     });
     console.log(verifyUser)
     };
-loginBtn.addEventListener("click", () => exsitingUser ())
+
+loginBtn.addEventListener("click", () => exsitingUser() )
+
+
+
+
