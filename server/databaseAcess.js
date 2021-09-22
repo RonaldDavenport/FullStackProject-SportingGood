@@ -46,30 +46,30 @@ app.get("/", (req, res) => {
   });
   
 
-app.get("/login", (req, res) => {
-    // check if there is a msg query
-    let bad_auth = req.query.msg ? true : false;
+// app.get("/login", (req, res) => {
+//     // check if there is a msg query
+//     let bad_auth = req.query.msg ? true : false;
   
-    // if there exists, send the error.
-    if (bad_auth) {
-       res.render('landing', {
-        error: "Invalid username or password",
-      });
-    } else {
-      // else just render the login
-       res.render('landing');
-    }
-  });
+//     // if there exists, send the error.
+//     if (bad_auth) {
+//        res.render('landing', {
+//         error: "Invalid username or password",
+//       });
+//     } else {
+//       // else just render the login
+//        res.render('landing');
+//     }
+//   });
 
-  app.get("/welcome", (req, res) => {
-    // get the username
-    let username = req.cookies.username;
+  // app.get("/welcome", (req, res) => {
+  //   // get the username
+  //   let username = req.cookies.username;
   
-    // render welcome page
-    return res.render("home", {
-      username,
-    });
-  });
+  //   // render welcome page
+  //   return res.render("home", {
+  //     username,
+  //   });
+  // });
 
   app.post("/process_login", (req, res) => {
     // get the data
