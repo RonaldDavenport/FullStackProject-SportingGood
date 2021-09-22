@@ -5,14 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elite Sporting Goods. Log In/Sign Up</title>
-  ${head}
+    <link rel="stylesheet" href="/client/public/landing.css">
 </head>
 <body>
     <H1>ELITE SPORTING GOODS</H1>
-
-
     <!-- <form action="home.html" >
-
         <input class="fname" placeholder="First Name" type="text">
         <input class="lname" placeholder="Last Name" type="text">
         <input class="username" placeholder="Username" type="text">
@@ -25,7 +22,7 @@
         <input class="login_password" placeholder="Password" type="text">
         <button class="logIn">Log In</button>
     </form>
-</div> --> 
+</div> -->
 <div class="login-wrap">
     <div class="login-html">
       <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
@@ -45,7 +42,7 @@
             <label for="check"><span class="icon"></span> Keep me Signed in</label>
           </div>
           <div class="group">
-            <input type="submit" class="signInbtn" value="Sign In">
+            <input type="submit" class="button" value="Sign In">
           </div>
           <div class="hr"></div>
           <div class="foot-lnk">
@@ -53,7 +50,7 @@
           </div>
         </div>
         <div class="sign-up-htm">
-            <form class="formSignUp" action="/client/template/home.html">
+            <form class="formSignUp" action="http://localhost:3001/home">
           <div class="group">
             <label for="user" class="fname">First Name</label>
             <input id="user" type="text" class="input">
@@ -75,7 +72,7 @@
             <input id="pass" type="text" class="input">
           </div>
           <div class="group">
-            <input type="submit" class="signUpbtn" value="Sign Up">
+            <input type="submit" class="button" value="Sign Up">
           </div>
         </form>
           <div class="hr"></div>
@@ -86,7 +83,6 @@
       </div>
     </div>
   </div>
-    
 </body>
 <script type="text/javascript" src="/client/template/JS/landing.js"></script>
 </html>
