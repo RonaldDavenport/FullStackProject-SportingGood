@@ -12,6 +12,7 @@ const path = require("path")
 const cors = require('cors')
 const PORT = process.env.PORT || 3001;
 const es6Renderer = require('express-es6-template-engine');
+const { where } = require("sequelize")
 
 
 
@@ -125,21 +126,48 @@ app.post("/createUser", async (req,res)=>{
     
     
   
-app.post("/viewProducts", async (req,res)=>{
+app.post("/viewProducts/:Category", async (req,res)=>{
+    const searchedProducts = await Products.findAll({
+       attributes: [
+           'Name',
+           'Price',
+           'Imageurl'
+           
+
+       ],
+       where:
+       {Category:req.params.Category}
+      
+    })
+    res.send(allProducts)
+
+    res.render('home',{locals: {searchedProducts:searchedProducts}});
+  })
+
+
+
+
+  app.post("/viewProducts", async (req,res)=>{
     const allProducts = await Products.findAll({
        attributes: [
            'Name',
            'Price',
            'Imageurl'
+           
+
        ]
+       
+      
     })
     res.send(allProducts)
-})
+
+    res.render('home',{locals: {allProducts:allProducts}});
+  })
 app.post("/createOrder", async (req,res)=>{
-    const {userId,productID,status}=req.body
+    const {userId, productID, status}=req.body;
     const newOrder = await Orders.create({
-        userId,
-        productID,
+       userId,
+        productID:productID,
         status
 
     
@@ -180,6 +208,16 @@ app.post("/viewOrders/:id", async (req,res)=>{
         }
     )
   res.send(viewOrder)
+})
+
+app.post("/deleteProduct/:id", async (req,res)=>{
+  const deleteProduct = await Products.destroy({
+    where:{
+      id:req.params.id,
+      Name:"Shooting Sleeve"
+    }
+  })
+  res.send("Product Deleted")
 })
 
 app.get('/setcookie', (req, res) => {
