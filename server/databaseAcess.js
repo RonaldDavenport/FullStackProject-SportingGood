@@ -9,12 +9,14 @@ const express = require("express")
 const cookieParser = require('cookie-parser')
 const helmet = require("helmet")
 const path = require("path")
+const cors = require('cors')
 const PORT = process.env.PORT || 3001;
 const es6Renderer = require('express-es6-template-engine');
 
 
 
 const app = express();
+app.use(cors());
 app.use(cookieParser());
 app.use(helmet());
 // const bodyParser = require('body-parser')
@@ -24,10 +26,11 @@ app.use(helmet());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/template",express.static(path.join(__dirname, 'template')));
+app.use("/client/template/JS",express.static(path.join(__dirname+ 'js')));
 app.engine('html', es6Renderer);
-app.set('views', './template')
 app.set('view engine','html');
+app.set('views', path.join(__dirname, '../client/template'));
+// app.set('view engine','html');
 
 
 // app.set("views", path.join(__dirname, "templates"));
@@ -37,37 +40,36 @@ app.get("/", (req, res) => {
     let username = req.cookies.username;
   
     // render the home page
-    return res.render("home", {
+    return res.render('landing', {
       username,
     });
   });
   
 
-app.get("/login", (req, res) => {
-    // check if there is a msg query
-    let bad_auth = req.query.msg ? true : false;
+// app.get("/login", (req, res) => {
+//     // check if there is a msg query
+//     let bad_auth = req.query.msg ? true : false;
   
-    // if there exists, send the error.
-    if (bad_auth) {
-       res.render('landing', {
-           locals: {bad_auth},
-        error: "Invalid username or password",
-      });
-    } else {
-      // else just render the login
-       res.render('landing', {locals: {bad_auth}});
-    }
-  });
+//     // if there exists, send the error.
+//     if (bad_auth) {
+//        res.render('landing', {
+//         error: "Invalid username or password",
+//       });
+//     } else {
+//       // else just render the login
+//        res.render('landing');
+//     }
+//   });
 
-  app.get("/welcome", (req, res) => {
-    // get the username
-    let username = req.cookies.username;
+  // app.get("/welcome", (req, res) => {
+  //   // get the username
+  //   let username = req.cookies.username;
   
-    // render welcome page
-    return res.render("home", {
-      username,
-    });
-  });
+  //   // render welcome page
+  //   return res.render("home", {
+  //     username,
+  //   });
+  // });
 
   app.post("/process_login", (req, res) => {
     // get the data
@@ -87,10 +89,10 @@ app.get("/login", (req, res) => {
       // saving the data to the cookies
       res.cookie("username", username);
       // redirect
-      return res.redirect("./home");
+       res.redirect("home");
     } else {
       // redirect with a fail msg
-      return res.redirect("landing?msg=fail");
+       res.redirect("landing?msg=fail");
     }
   });
 
@@ -103,6 +105,7 @@ app.get("/login", (req, res) => {
   
 
 app.post("/createUser", async (req,res)=>{
+  // res.render('landing')
     const { firstname, lastname, username, password, email } = req.body;
     const newUser = await Users.create({
         firstname,
@@ -114,9 +117,14 @@ app.post("/createUser", async (req,res)=>{
     console.log(newUser)
     // res.render("index",{locals: {newtask:newtask}});
     res.send(newUser)
-    
-    
+
+     res.render('home')
+   
     })
+
+    
+    
+  
 app.post("/viewProducts", async (req,res)=>{
     const allProducts = await Products.findAll({
        attributes: [
@@ -195,4 +203,4 @@ app.get('/deletecookie', (req, res) => {
     res.send('Cookie has been deleted successfully');
 });
 
-app.listen(PORT,console.log("port is running"))
+app.listen(PORT,console.log(PORT ,"port is running"))
