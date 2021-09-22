@@ -1,3 +1,15 @@
+.headerTag{
+    display: flex;
+    justify-content: center;
+    font-family: 'Alfa Slab One';
+    font-weight: 800;
+}
+.headerTag2{
+    display: flex;
+    justify-content: center;
+    font-family: 'Alfa Slab One';
+    font-weight: 600;
+}
 .topContain{
     display: flex;
     flex-direction: column;
@@ -11,6 +23,13 @@
     font-family: 'Alfa Slab One';
     font-weight: 800;
     
+}
+.searchBtn{
+    background:#dca91d;
+    width: 110px;
+    border-radius: 8px;
+    font-family: 'Alfa Slab One';
+    color: whitesmoke;
 }
 .social-part .fa{
     padding-right:20px;

@@ -1,7 +1,6 @@
 console.log("connected!")
-
 //  CREATING A NEW USER
-const signUpbtn = document.querySelector(".signUp");
+const signUpbtn = document.getElementById(".signUp");
 const createNewUser = async () => {
     const url = "http://localhost:3001/createUser";
     console.log("fired")
@@ -11,7 +10,6 @@ const createNewUser = async () => {
     const newPassword = document.querySelector(".password").value;
     const newLname = document.querySelector(".lname").value;
     const newEmail = document.querySelector(".email").value;
-
      console.log(newFname)
     const newUser = {
         firstname : newFname,
@@ -30,16 +28,25 @@ const createNewUser = async () => {
     });
     console.log(createUser)
 };
-
 const newHTML= async () =>{
     location.href="https://google.com"
 }
-signUpbtn.addEventListener("click", () => createNewUser())
+const redirectHome= async ()=> {
+    const redirecturl = "http://localhost:3001/home"
+    console.log(url)
+    const redirect = await fetch (redirecturl,{
+        method: "GET",
+        mode: "cors",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+});
+}
+signUpbtn.addEventListener("click", () => createNewUser());
+signUpbtn.addEventListener("click",() => redirectHome());
 // signUpbtn.addEventListener("click", location.href = "home.html" )
-
 //Logging In Exsisting User
-const loginBtn = document.querySelector(".logIn")
-
+const loginBtn = document.getElementById(".signIn")
 const exsitingUser = async (e) =>{
     e.preventDefault()
     const url = "http://localhost:3001/process_login";
@@ -61,8 +68,31 @@ const exsitingUser = async (e) =>{
     });
     console.log(verifyUser)
     };
-
 loginBtn.addEventListener("click", () => exsitingUser() )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
