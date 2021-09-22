@@ -8,15 +8,20 @@
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
-    
-}
-.navBar{
-    /* border: solid black; */
     font-family: 'Alfa Slab One';
-    font-weight: 600;
-}
-.navbar_nav{
-    display: flex;
-    justify-content: space-around;
+    font-weight: 800;
     
+}
+.social-part .fa{
+    padding-right:20px;
+    color: #dca91d;
+}
+ul li a{
+    margin-right: 20px;
+    font-weight: 400;
+    font-family: 'Alfa Slab One';
+    
+}
+.navbar {
+    border-bottom: double #dca91d;
 }
