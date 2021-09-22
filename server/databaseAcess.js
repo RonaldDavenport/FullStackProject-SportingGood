@@ -6,16 +6,106 @@ console.log(Users)
 console.log(Orders)
 console.log(Products)
 const express = require("express")
+const cookieParser = require('cookie-parser')
+const helmet = require("helmet")
 const path = require("path")
+const cors = require('cors')
+const PORT = process.env.PORT || 3001;
+const es6Renderer = require('express-es6-template-engine');
+
 
 
 const app = express();
+app.use(cors());
+app.use(cookieParser());
+app.use(helmet());
 // const bodyParser = require('body-parser')
-const PORT = 3001
+// const PORT = 3001
+
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+
+app.use("/client/template/JS",express.static(path.join(__dirname+ 'js')));
+app.engine('html', es6Renderer);
+app.set('view engine','html');
+app.set('views', path.join(__dirname, '../client/template'));
+// app.set('view engine','html');
+
+
+// app.set("views", path.join(__dirname, "templates"));
+
+app.get("/", (req, res) => {
+    // check if user is logged in, by checking cookie
+    let username = req.cookies.username;
+  
+    // render the home page
+    return res.render('landing', {
+      username,
+    });
+  });
+  
+
+// app.get("/login", (req, res) => {
+//     // check if there is a msg query
+//     let bad_auth = req.query.msg ? true : false;
+  
+//     // if there exists, send the error.
+//     if (bad_auth) {
+//        res.render('landing', {
+//         error: "Invalid username or password",
+//       });
+//     } else {
+//       // else just render the login
+//        res.render('landing');
+//     }
+//   });
+
+  // app.get("/welcome", (req, res) => {
+  //   // get the username
+  //   let username = req.cookies.username;
+  
+  //   // render welcome page
+  //   return res.render("home", {
+  //     username,
+  //   });
+  // });
+
+  app.post("/process_login", (req, res) => {
+    // get the data
+    let { username, password } = req.body;
+  
+    // fake test data
+    let userdetails = {
+      username: "Bob",
+      password: "123456",
+    };
+  
+    // basic check
+    if (
+      username === userdetails["username"] &&
+      password === userdetails["password"]
+    ) {
+      // saving the data to the cookies
+      res.cookie("username", username);
+      // redirect
+       res.redirect("home");
+    } else {
+      // redirect with a fail msg
+       res.redirect("landing?msg=fail");
+    }
+  });
+
+  app.get("/logout", (req, res) => {
+    // clear the cookie
+    res.clearCookie("username");
+    // redirect to login
+    return res.redirect("/login");
+  });
+  
 
 app.post("/createUser", async (req,res)=>{
+  // res.render('landing')
     const { firstname, lastname, username, password, email } = req.body;
     const newUser = await Users.create({
         firstname,
@@ -27,9 +117,14 @@ app.post("/createUser", async (req,res)=>{
     console.log(newUser)
     // res.render("index",{locals: {newtask:newtask}});
     res.send(newUser)
-    
-    
+
+     res.render('home')
+   
     })
+
+    
+    
+  
 app.post("/viewProducts", async (req,res)=>{
     const allProducts = await Products.findAll({
        attributes: [
@@ -87,5 +182,25 @@ app.post("/viewOrders/:id", async (req,res)=>{
   res.send(viewOrder)
 })
 
+app.get('/setcookie', (req, res) => {
+    res.cookie(`Cookie token name`,`encrypted cookie string Value`,{
+     maxAge: 5050,
+     expires: new Date ('12 12 2021'),
+     secure: true,
+     httpOnly: true,
+     sameSite: 'lax'
+    });
+    res.send('Cookie have been saved successfully');
+});
 
-app.listen(PORT,console.log("port is running"))
+app.get("/getcookie",(req,res)=>{
+    console.log(req.cookies)
+    res.send(req.cookies)
+})
+app.get('/deletecookie', (req, res) => {
+    //show the saved cookies
+    res.clearCookie()
+    res.send('Cookie has been deleted successfully');
+});
+
+app.listen(PORT,console.log(PORT ,"port is running"))
