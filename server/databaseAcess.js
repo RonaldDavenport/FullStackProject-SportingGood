@@ -22,7 +22,7 @@ app.use(helmet());
 // const bodyParser = require('body-parser')
 // const PORT = 3001
 
-
+app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
