@@ -2,7 +2,7 @@ console.log("connected!")
 
 const updateBtn = document.querySelector(".btn")
 const updateUser = async () =>{
-    const updateUrl = "http://updateAccountInfo/"
+    const updateUrl = "http://localhost:3001/updateAccountInfo/"
     const updateFnm = document.getElementById("fName").value;
     const updateLnm = document.getElementById("lName").value;
     const updatUnm = document.getElementById("usName").value;

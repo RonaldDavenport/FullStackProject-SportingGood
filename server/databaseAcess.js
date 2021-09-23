@@ -8,11 +8,12 @@ console.log(Products)
 const express = require("express")
 const session = require("express-session")
 const cookieParser = require('cookie-parser')
+const es6Renderer = require ("express-es6-template-engine")
 const helmet = require("helmet")
 const path = require("path")
 const cors = require('cors')
 const PORT = 3001;
-const es6Renderer = require('express-es6-template-engine');
+
 const { where } = require("sequelize")
 
 
@@ -51,29 +52,29 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/client/template/JS",express.static(path.join(__dirname, 'js')));
 app.engine('html', es6Renderer);
+console.log(__dirname)
+app.set('views', path.join(__dirname,'templates'));
 app.set('view engine','html');
-app.set('views', path.join(__dirname, '../client/template'));
+
 // app.set('view engine','html');
 
 
 // app.set("views", path.join(__dirname, "templates"));
 
 app.get("/", (req, res) => {
-  res.render("landing",{
+  res.render("shoppingcart",{
     
-    partials: {
-      landingHead: '/partials/landingHead'
-  }
+   
   })
 
   });
 
   app.get("/home",  async (req,res)=>{
-     res.render("home")
+    return res.render("home")
   
-     
+     console.log('home')
    })
-
+// console.log(home)
 //    res.render('home', {
 //      locals: {
 //          allProducts:allProducts
@@ -97,12 +98,13 @@ app.post("/login", async (req, res) => {
     });
 
     const userFound = checkUser.dataValues;
+    console.log(userFound)
     if(checkUser.dataValues){
       req.session.user = userFound;
-      res.redirect("home")
+      res.send("home")
     } else {
-      res
-      .status(401)
+      
+      res.status(401)
       .send("Try Again or Sign Up!")
     }
   });
@@ -174,6 +176,7 @@ app.post("/createUser", async (req,res)=>{
 app.post("/viewProducts/:Category", async (req,res)=>{
     const searchedProducts = await Products.findAll({
        attributes: [
+             'id',
            'Name',
            'Price',
            'Imageurl'
@@ -185,8 +188,9 @@ app.post("/viewProducts/:Category", async (req,res)=>{
       
     })
     console.log(searchedProducts)
+    res.send(searchedProducts)
 
-    res.render('home',{locals: {searchedProducts}});
+   
   })
 
 
@@ -223,7 +227,7 @@ app.post("/createOrder", async (req,res)=>{
     })
     res.send(newOrder)
 })
-app.post("/updateAccountInfo/:id", async (req,res) =>{
+app.post("/updateAccountInfo/", async (req,res) =>{
   const {firstname,lastname,username,password}= req.body
   const newInfo = await Users.update(req.body,{
       where:{
