@@ -32,7 +32,7 @@ console.log(json)
 productView();
     // productView();
 ////SEARCHING DATABASE FOR PRODUCTS
-// const searchBtn = document.querySelector(".searchBtn");
+// const searchBtn = document.getElementById(".searchBtn");
 // const productOptions = async () => {
 //     searchUrl = "http://localhost:3001/viewProducts"
 //     const searchValue = document.querySelector(".searchBar").value;

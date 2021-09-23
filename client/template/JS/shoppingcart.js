@@ -1,22 +1,28 @@
 console.log("Connected!")
-//TO VIEW ITEMS IN CART
-const viewBtn = document.querySelector(".view_cart");
+//TO VIEW ITEMS CART
 const viewUserCart =  async () => {
     const cartUrl = "http://localhost:3001/viewOrders"
-    const getCart = await fetch (cartUrl, {
+    const userOrder = await fetch (cartUrl, {
         method: 'POST',
         mode: "cors",
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         },
-        body: JSON.stringify(getCart)
-    });
-    const jsonCart = await getCart.json();
-    const userCart = document.querySelector(".itemsInCart")
-    userCart.append(jsonCart)
-
+        body: JSON.parse(JSON.stringify(viewOrder))
+    }); 
+    console.log(userOrder)
+    const jsonOrder = await viewOrder.json();
+    for (const orders of jsonOrder){
+        if (userId === userId){
+            const dBtn = document.createElement("button")
+            dBtn.name = "REMOVE";
+            dBtn.className += "deleteBtn"
+            const userCart = document.querySelector(".itemsInCart");
+            userCart.append(jsonOrder, dBtn);
+        };
     };
- viewBtn.addEventListener("click", () => viewUserCart())   
+};
+  viewUserCart()   
 
 //NAVBAR FUNCTIONS
 $(document).ready(function () {
