@@ -1,16 +1,5 @@
-.headerTag{
-    display: flex;
-    justify-content: center;
-    font-family: 'Alfa Slab One';
-    font-weight: 800;
-}
-.headerTag2{
-    display: flex;
-    justify-content: center;
-    font-family: 'Alfa Slab One';
-    font-weight: 600;
-}
 .topContain{
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,13 +13,51 @@
     font-weight: 800;
     
 }
-.searchBtn{
-    background:#dca91d;
-    width: 110px;
-    border-radius: 8px;
+.bn53 {
+    background-color: #dca91d;
+    padding: 7px;
+    width: 100px;
+    border-radius: 5px;
     font-family: 'Alfa Slab One';
-    color: whitesmoke;
-}
+    font-size: larger;
+    animation: bn53bounce 4s infinite;
+    cursor: pointer;
+  }
+  
+  @keyframes bn53bounce {
+    5%,
+    50% {
+      transform: scale(1);
+    }
+  
+    10% {
+      transform: scale(1);
+    }
+  
+    15% {
+      transform: scale(1);
+    }
+  
+    20% {
+      transform: scale(1) rotate(-5deg);
+    }
+  
+    25% {
+      transform: scale(1) rotate(5deg);
+    }
+  
+    30% {
+      transform: scale(1) rotate(-3deg);
+    }
+  
+    35% {
+      transform: scale(1) rotate(2deg);
+    }
+  
+    40% {
+      transform: scale(1) rotate(0);
+    }
+  }
 .social-part .fa{
     padding-right:20px;
     color: #dca91d;

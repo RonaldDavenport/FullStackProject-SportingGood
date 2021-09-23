@@ -29,7 +29,7 @@ const createNewUser = async () => {
         },
         body: JSON.stringify(newUser),
     });
-    console.log(newUser)
+    console.log(createUser)
 };
 
 signUpbtn.addEventListener("click", () => createNewUser());
@@ -61,7 +61,7 @@ const exsitingUser = async () =>{
     });
     console.log(verifyUser)
     };
-loginBtn.addEventListener("click", () => { exsitingUser();} )
+loginBtn.addEventListener("click", () =>  exsitingUser())
 
 
 
