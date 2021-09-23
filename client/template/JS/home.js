@@ -1,4 +1,5 @@
 // const products = require("../../../server/models/products");
+
 // const productss = require("../../../server/models/products");
 const productContain = document.querySelector(".inventory");
 console.log("CONNECTED!")
@@ -10,9 +11,11 @@ const productView = async () =>{
          mode: "cors",
          headers: {
             "Content-type":"application/json; charset=UTF-8",
+
       },
 });
 const json = await fetchProducts.json ();
+
 for(const items of json){
 const itemName = items.Name;
 const itemPrice = items.Price;
@@ -26,9 +29,11 @@ productPrice.innerHTML = itemPrice
 productImg.innerHTML = itemURL
 productDiv.append(productImg, productName, productPrice)
 productContain.append(productDiv);
+
 }
 console.log(json)
 };
+
 productView();
     // productView();
 ////SEARCHING DATABASE FOR PRODUCTS
