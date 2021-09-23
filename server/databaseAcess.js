@@ -6,12 +6,14 @@ console.log(Users)
 console.log(Orders)
 console.log(Products)
 const express = require("express")
+const session = require("express-session")
 const cookieParser = require('cookie-parser')
 const helmet = require("helmet")
 const path = require("path")
 const cors = require('cors')
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
 const es6Renderer = require('express-es6-template-engine');
+const { where } = require("sequelize")
 
 
 
@@ -19,14 +21,35 @@ const app = express();
 app.use(cors());
 app.use(cookieParser());
 app.use(helmet());
+app.use(session
+  ({
+    secret: "secret",
+    resave : false,
+    saveUninitialized: true,
+    cookie: {secure:false, maxAge:2592000}
+  }
+
+  ))
 // const bodyParser = require('body-parser')
 // const PORT = 3001
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
+app.use(function (req, res, next) {
+  res.setHeader(
+    'Content-Security-Policy',
+    "script-src 'self'; font-src 'self'; img-src 'https://nike.com' https://nike.com; script-src 'self'; style-src 'self' ; frame-src 'self'"
+  );
+  next();
+});
 
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'));
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/client/template/JS",express.static(path.join(__dirname+ 'js')));
+app.use("/client/template/JS",express.static(path.join(__dirname, 'js')));
 app.engine('html', es6Renderer);
 app.set('view engine','html');
 app.set('views', path.join(__dirname, '../client/template'));
@@ -36,30 +59,53 @@ app.set('views', path.join(__dirname, '../client/template'));
 // app.set("views", path.join(__dirname, "templates"));
 
 app.get("/", (req, res) => {
-    // check if user is logged in, by checking cookie
-    let username = req.cookies.username;
-  
-    // render the home page
-    return res.render('landing', {
-      username,
-    });
-  });
-  
+  res.render("landing",{
+    
+    partials: {
+      landingHead: '/partials/landingHead'
+  }
+  })
 
-// app.get("/login", (req, res) => {
-//     // check if there is a msg query
-//     let bad_auth = req.query.msg ? true : false;
+  });
+
+  app.get("/home",  async (req,res)=>{
+     res.render("home")
   
-//     // if there exists, send the error.
-//     if (bad_auth) {
-//        res.render('landing', {
-//         error: "Invalid username or password",
-//       });
-//     } else {
-//       // else just render the login
-//        res.render('landing');
-//     }
-//   });
+     
+   })
+
+//    res.render('home', {
+//      locals: {
+//          allProducts:allProducts
+//      }
+//  });
+
+    // res.render("home")
+  
+  
+app.get("/shoppingCart",(req,res)=>{
+  res.render("shoppingCart")
+})
+
+app.post("/login", async (req, res) => {
+    const {username,password}=req.body
+    const checkUser = await Users.findOne({
+      where:{
+        username,
+        password,
+      },
+    });
+
+    const userFound = checkUser.dataValues;
+    if(checkUser.dataValues){
+      req.session.user = userFound;
+      res.redirect("home")
+    } else {
+      res
+      .status(401)
+      .send("Try Again or Sign Up!")
+    }
+  });
 
   // app.get("/welcome", (req, res) => {
   //   // get the username
@@ -118,28 +164,57 @@ app.post("/createUser", async (req,res)=>{
     // res.render("index",{locals: {newtask:newtask}});
     res.send(newUser)
 
-     res.render('home')
+     
    
     })
 
     
     
   
-app.post("/viewProducts", async (req,res)=>{
+app.post("/viewProducts/:Category", async (req,res)=>{
+    const searchedProducts = await Products.findAll({
+       attributes: [
+           'Name',
+           'Price',
+           'Imageurl'
+           
+
+       ],
+       where:
+       {Category:req.params.Category}
+      
+    })
+    console.log(searchedProducts)
+
+    res.render('home',{locals: {searchedProducts}});
+  })
+
+
+
+
+  app.post("/viewProducts", async (req,res)=>{
     const allProducts = await Products.findAll({
        attributes: [
            'Name',
            'Price',
            'Imageurl'
+           
+
        ]
+       
+      
     })
+    // res.send(allProducts)
+
+    console.log(allProducts)
     res.send(allProducts)
-})
+  });
+  
 app.post("/createOrder", async (req,res)=>{
-    const {userId,productID,status}=req.body
+    const {userId, productID, status}=req.body;
     const newOrder = await Orders.create({
-        userId,
-        productID,
+       userId,
+        productID:productID,
         status
 
     
@@ -180,6 +255,16 @@ app.post("/viewOrders/:id", async (req,res)=>{
         }
     )
   res.send(viewOrder)
+})
+
+app.post("/deleteProduct/:id", async (req,res)=>{
+  const deleteProduct = await Products.destroy({
+    where:{
+      id:req.params.id,
+      Name:"Shooting Sleeve"
+    }
+  })
+  res.send("Product Deleted")
 })
 
 app.get('/setcookie', (req, res) => {
