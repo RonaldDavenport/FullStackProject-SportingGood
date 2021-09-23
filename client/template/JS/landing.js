@@ -28,22 +28,7 @@ const createNewUser = async () => {
     });
     console.log(createUser)
 };
-const newHTML= async () =>{
-    location.href="https://google.com"
-}
-const redirectHome= async ()=> {
-    const redirecturl = "http://localhost:3001/home"
-    console.log(url)
-    const redirect = await fetch (redirecturl,{
-        method: "GET",
-        mode: "cors",
-        headers: {
-            "Content-type": "application/json; charset=UTF-8",
-        },
-});
-}
 signUpbtn.addEventListener("click", () => createNewUser());
-signUpbtn.addEventListener("click",() => redirectHome());
 // signUpbtn.addEventListener("click", location.href = "home.html" )
 //Logging In Exsisting User
 const loginBtn = document.getElementById(".signIn")
@@ -69,13 +54,6 @@ const exsitingUser = async (e) =>{
     console.log(verifyUser)
     };
 loginBtn.addEventListener("click", () => exsitingUser() )
-
-
-
-
-
-
-
 
 
 

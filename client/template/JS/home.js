@@ -1,35 +1,37 @@
+// const products = require("../../../server/models/products");
+// const productss = require("../../../server/models/products");
+const productContain = document.querySelector(".inventory");
 console.log("CONNECTED!")
 //PRODUCTS LISTED ON HOME PAGE
-// const productView = async () =>{
-//     const productsURL = "http://localhost:3001/viewProducts";
-//     const allProducts = await fetch (productsURL, {
-//     method: 'POST',
-//      mode: "cors",
-//      headers: {
-//         "Content-type": "application/json; charset=UTF-8",
-//   },
-//      attributes: [
-//         'Name',
-//         'Price',
-//         'Imageurl'
-//      ],
-//      body: JSON.stringify(allProducts)
-// });
-    // const jsonProducts = await allProducts.json();
-    // console.log(jsonProducts)
-    // for(product of jsonProducts){
-    //     const productContain = document.querySelector(".inventory");
-    //     const productName = document.createElement("h3");
-    //     const productImg = document.createElement("img");
-    //     const productPrice = document.createElement("h4");
-    //     productName.innerHTML = product.Name;
-    //     productImg.src = product.Imageurl;
-    //     productPrice.innerHTML = product.Price;
-    //     productContain.append(productName, productImg, productPrice);
-    // };
-// };
-//     productView();
-//SEARCHING DATABASE FOR PRODUCTS
+const productView = async () =>{
+    const productsURL = "http://localhost:3001/viewProducts";
+    const fetchProducts = await fetch (productsURL, {
+        method: 'POST',
+         mode: "cors",
+         headers: {
+            "Content-type":"application/json; charset=UTF-8",
+      },
+});
+const json = await fetchProducts.json ();
+for(const items of json){
+const itemName = items.Name;
+const itemPrice = items.Price;
+const itemURL = items.Imageurl;
+const productDiv = document.createElement("div");
+const productName = document.createElement("h3");
+const productImg = document.createElement("img");
+const productPrice = document.createElement("h4");
+productName.innerHTML = itemName
+productPrice.innerHTML = itemPrice
+productImg.innerHTML = itemURL
+productDiv.append(productImg, productName, productPrice)
+productContain.append(productDiv);
+}
+console.log(json)
+};
+productView();
+    // productView();
+////SEARCHING DATABASE FOR PRODUCTS
 // const searchBtn = document.querySelector(".searchBtn");
 // const productOptions = async () => {
 //     searchUrl = "http://localhost:3001/viewProducts"
@@ -82,7 +84,7 @@ console.log("CONNECTED!")
 //         console.table(createOrder)
 // };
 // addBtn.addEventListener("click", () => fillCart())
-//NAVBAR FUNCTIONS
+// //NAVBAR FUNCTIONS
 // $(document).ready(function () {
 //     $('.navbar-light .dmenu').hover(function () {
 //             $(this).find('.sm-menu').first().stop(true, true).slideDown(150);

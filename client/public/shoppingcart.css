@@ -1,0 +1,13 @@
+.social-part .fa{
+    padding-right:20px;
+    color: #dca91d;
+}
+ul li a{
+    margin-right: 20px;
+    font-weight: 400;
+    font-family: 'Alfa Slab One';
+    
+}
+.navbar {
+    border-bottom: double #dca91d;
+}
