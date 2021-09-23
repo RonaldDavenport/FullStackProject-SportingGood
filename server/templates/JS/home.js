@@ -69,21 +69,17 @@ const productOptions = async () => {
         itemImg.src = items.Imageurl;
         itemName.innerHTML = items.Name;
         itemPrice.innerHTML = items.Price;
-        itemID.innerHTML= itemID.innerHTML= "Product ID:" + " " + items.id
-        // itemID.innerHTML = item.id;
-        // itemID.className += ".productID";
+        itemID.innerHTML= "Product ID:" + " " + items.id;
+        itemID.className += ".productID";
         addToCart.className += ".addToCart";
         addToCart.innerHTML = "Add to Cart";
         searchedItemDiv.append(itemName, itemImg, itemPrice,itemID,addToCart);
-        productContain.append(searchedItemDiv)
+        productContain.append(searchedItemDiv);
     };
     console.log(jsonItems)
 };
 searchBtn.addEventListener("click", () => productOptions())
 //ADDING PRODUCT TO CART
-
-
-
 const addBtn = document.querySelector(".addToCart");
 const fillCart = async () => {
     const orderUrl = "http://localhost:3001/createOrder";
@@ -101,7 +97,10 @@ const fillCart = async () => {
     });
         console.table(createOrder)
 };
-addBtn.addEventListener("click", () => fillCart())
+function addToCartMessage(){
+    alert(itemName, "has been add to your cart!")
+};
+addBtn.addEventListener("click", () => {fillCart(); addToCartMessage();})
 //NAVBAR FUNCTIONS
 $(document).ready(function () {
     $('.navbar-light .dmenu').hover(function () {

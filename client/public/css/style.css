@@ -71,3 +71,14 @@ ul li a{
 .navbar {
     border-bottom: double #dca91d;
 }
+.inventory{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.addToCart{
+  background-color: #dca91d;
+  border-radius: 5px;
+  font-family: 'Alfa Slab One';
+};
