@@ -46,8 +46,8 @@ const exsitingUser = async () =>{
     const password = document.querySelector("#passlogin").value;
     console.log(username)
     const verify = {
-        username,
-        password,
+        username:username,
+        password:password,
         //column username
         //column password
     };
@@ -59,9 +59,18 @@ const exsitingUser = async () =>{
         },
         body: JSON.stringify(verify),
     });
+    
     console.log(verifyUser)
+    if(verifyUser.status===200){
+        window.location.href="home.html"
+    }
     };
 loginBtn.addEventListener("click", () =>  exsitingUser())
+
+
+
+
+
 
 
 
