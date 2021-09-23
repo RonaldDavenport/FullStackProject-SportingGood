@@ -32,8 +32,20 @@ app.use(session
   ))
 // const bodyParser = require('body-parser')
 // const PORT = 3001
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
+app.use(function (req, res, next) {
+  res.setHeader(
+    'Content-Security-Policy',
+    "script-src 'self'; font-src 'self'; img-src 'https://nike.com' https://nike.com; script-src 'self'; style-src 'self' ; frame-src 'self'"
+  );
+  next();
+});
 
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'));
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
@@ -49,34 +61,27 @@ app.set('views', path.join(__dirname, '../client/template'));
 app.get("/", (req, res) => {
   res.render("landing",{
     
+    partials: {
+      landingHead: '/partials/landingHead'
+  }
   })
 
   });
 
   app.get("/home",  async (req,res)=>{
-
-    const allProducts = await Products.findAll({
-      attributes: [
-          'Name',
-          'Price',
-          'Imageurl'
-          
-
-      ]
-      
+     res.render("home")
+  
      
    })
-   console.log(allProducts)
-   // res.send(allProducts)
 
-   res.render('home', {
-     locals: {
-         allProducts:allProducts
-     }
- });
+//    res.render('home', {
+//      locals: {
+//          allProducts:allProducts
+//      }
+//  });
 
     // res.render("home")
-  })
+  
   
 app.get("/shoppingCart",(req,res)=>{
   res.render("shoppingCart")
@@ -90,6 +95,7 @@ app.post("/login", async (req, res) => {
         password,
       },
     });
+
     const userFound = checkUser.dataValues;
     if(checkUser.dataValues){
       req.session.user = userFound;
@@ -158,7 +164,7 @@ app.post("/createUser", async (req,res)=>{
     // res.render("index",{locals: {newtask:newtask}});
     res.send(newUser)
 
-     res.render('home')
+     
    
     })
 
@@ -200,13 +206,10 @@ app.post("/viewProducts/:Category", async (req,res)=>{
     })
     // res.send(allProducts)
 
-    res.render('home', {
-      locals: {
-          allProducts:allProducts
-      }
+    console.log(allProducts)
+    res.send(allProducts)
   });
-  console.log(allProducts)
-  })
+  
 app.post("/createOrder", async (req,res)=>{
     const {userId, productID, status}=req.body;
     const newOrder = await Orders.create({
