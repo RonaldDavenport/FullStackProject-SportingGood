@@ -13,9 +13,8 @@ const productView = async () =>{
             "Content-type":"application/json; charset=UTF-8",
 
       },
-           
 });
-const json = await fetchProducts.json (); 
+const json = await fetchProducts.json ();
 
 for(const items of json){
 const itemName = items.Name;

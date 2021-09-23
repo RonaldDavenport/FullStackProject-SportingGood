@@ -17,7 +17,9 @@ const createNewUser = async () => {
         lastname:newLname,
         username:newUserName,
         password:newPassword,
-        email:newEmail 
+
+        email:newEmail
+
     };
     const createUser = await fetch (url, {
         method: "POST",
@@ -31,6 +33,8 @@ const createNewUser = async () => {
 };
 
 signUpbtn.addEventListener("click", () => createNewUser());
+
+
 
 // signUpbtn.addEventListener("click", location.href = "home.html" )
 //Logging In Exsisting User
@@ -58,12 +62,6 @@ const exsitingUser = async () =>{
     console.log(verifyUser)
     };
 loginBtn.addEventListener("click", () => { exsitingUser();} )
-
-
-
-
-
-
 
 
 
