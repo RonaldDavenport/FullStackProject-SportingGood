@@ -69,7 +69,7 @@ const productOptions = async () => {
         itemImg.src = items.Imageurl;
         itemName.innerHTML = items.Name;
         itemPrice.innerHTML = items.Price;
-        itemID.innerHTML=(items.id)
+        itemID.innerHTML= "Product ID:" + " " + items.id 
         // itemID.innerHTML = item.id;
         // itemID.className += ".productID";
         addToCart.className += ".addToCart";
