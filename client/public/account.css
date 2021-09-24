@@ -74,14 +74,14 @@ ul li a{
 .card1{
   position: relative;
   left: 500px;
-  top: 412px;
-  border: solid black;
+  top: 35.5rem;
+ 
 }
 .card2{
   position: relative;
-  top: 20px;
+  top: 2rem;
   left: 10px;
-  border: solid black;
+ 
 
 }
 h4{
@@ -89,3 +89,13 @@ h4{
   justify-content: end;
   font:600 16px/18px 'Alfa Slab One';
 }
+@media screen and (max-width:1399px){}
+@media screen and (max-width:959px){
+  .container-xl{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media screen and (max-width:479px){}

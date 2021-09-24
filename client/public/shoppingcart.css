@@ -11,41 +11,56 @@ ul li a{
 .navbar {
     border-bottom: double #dca91d;
 }
-.col  {
-    border:  solid black;
-    width: 75%;
-    height: 200px;
-    position: relative;
-    left: 70px;
-}
-.container-lg{
-    margin: 80px;
-    position: relative;
-    right: 120px;
-    border:  solid black;
-    width: 75%;
-    height: 200px;
-}
+
+
 .container-xl{
     margin: 150px;
     position: relative;
     right: 1px;
+    display: grid;
+    grid-template: repeat(2, 35rem) / repeat(3, 45rem);
+    gap: 1rem;
     display: flex;
     justify-content: center;
-    border:  solid black;
+    justify-content: space-between;
+    border-top: double #dca91d;
     width: 85%;
     height: 400px;
 }
 .itemsInCart{
-    margin: 50px;
-    position: relative;
-    left: 180px;
-    border: solid black;
-    width: 75%;
-    height: 200px;
+   
+   font-family: 'Alfa Slab One';
+   
 }
-.container{
-    margin: 400px;
-    position: relative;
-    right: 50px;
+.card{
+    font-family: 'Alfa Slab One';
+    border-radius: 20px;
 }
+.card1{
+    position: relative;
+    left: 500px;
+    top: 35.5rem;
+   
+  }
+  .card2{
+    position: relative;
+    top: 2rem;
+    left: 10px;
+   
+  
+  }
+  h4{
+    display: flex;
+    justify-content: end;
+    font:600 16px/18px 'Alfa Slab One';
+  }
+  .btnLink{
+    background-color: #dca91d;
+    color: white;
+    font-family: 'Alfa Slab One';
+  }
+  .copyright{
+    display: flex;
+    justify-content: end;
+    font-family: 'Alfa Slab One';
+  }
