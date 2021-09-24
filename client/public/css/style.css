@@ -71,14 +71,129 @@ ul li a{
 .navbar {
     border-bottom: double #dca91d;
 }
-.inventory{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.mainDivHeader{
+  font-family: 'Alfa Slab One';
 }
+.inventory{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    position: relative;
+    bottom: 45rem;
+    border: solid black;
+}
+.copyright{
+  display: flex;
+  justify-content: end;
+  font-family: 'Alfa Slab One';
+  font-size: medium;
+  font-weight: 700;
+}
+/* img:hover {
+  width: 250px;
+  height: 350px;
+} */
 .addToCart{
   background-color: #dca91d;
   border-radius: 5px;
   font-family: 'Alfa Slab One';
 };
+.card{
+  position: relative;
+  left: 50rem;
+}
+.card2{
+  border-radius: 3px;
+  position: relative;
+  left: 31rem;
+  bottom: 33.5rem;
+}
+.card3{
+  border: solid thin rgb(201, 201, 201);
+  border-radius: 3px;
+  position: relative;
+  left: 62.5rem;
+  bottom: 52rem;
+}
+.container-lg{
+  height: 30%;
+  font-family: 'Alfa Slab One';
+  
+}
+@media screen and (max-width:1399px){
+  .card{
+    position: relative;
+   
+  }
+  .card2{
+    border-radius: 3px;
+    position: relative;
+    left: 26rem;
+    bottom: 33.5rem;
+  }
+  .card3{
+    border: solid thin rgb(201, 201, 201);
+    border-radius: 3px;
+    position: relative;
+    left: 51.3rem;
+    bottom: 52.6rem;
+  }
+}
+@media screen and (max-width:1199px){
+  .card2{
+    border-radius: 3px;
+    position: relative;
+    left: 20rem;
+  }
+  .card3{
+    border: solid thin rgb(201, 201, 201);
+    border-radius: 3px;
+   position: relative;
+   left: 40rem;
+  }
+}
+@media screen and (max-width:955px){
+  .card{
+    position: relative;
+    
+  }
+  .card2{
+    border-radius: 3px;
+    position: relative;
+    
+  }
+  .card3{
+    border: solid thin rgb(201, 201, 201);
+    border-radius: 3px;
+    position: relative;
+    
+  }
+}
+@media screen and (max-width:479px){
+  .container-lg{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .card{
+    position: relative;
+    
+  }
+  .card2{
+    border-radius: 3px;
+    position: relative;
+    bottom: -2rem;
+    left: -0.1rem;
+    background: #fff;
+    color: white;
+  }
+  .card3{
+   
+    position: relative;
+    bottom: -2rem;
+    left: -0.1rem;
+    background: #fff;
+    color: white;
+  }
+}
