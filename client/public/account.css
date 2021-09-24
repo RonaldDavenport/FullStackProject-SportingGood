@@ -71,3 +71,21 @@ ul li a{
 .btn:hover {
   opacity: 1;
 }
+.card1{
+  position: relative;
+  left: 500px;
+  top: 412px;
+  border: solid black;
+}
+.card2{
+  position: relative;
+  top: 20px;
+  left: 10px;
+  border: solid black;
+
+}
+h4{
+  display: flex;
+  justify-content: end;
+  font:600 16px/18px 'Alfa Slab One';
+}
