@@ -90,7 +90,7 @@ h4{
   font:600 16px/18px 'Alfa Slab One';
 }
 @media screen and (max-width:1399px){}
-@media screen and (max-width:959px){
+@media screen and (max-width:1029px){
   .container-xl{
     display: flex;
     flex-direction: column;
