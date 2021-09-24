@@ -71,3 +71,31 @@ ul li a{
 .btn:hover {
   opacity: 1;
 }
+.card1{
+  position: relative;
+  left: 500px;
+  top: 35.5rem;
+ 
+}
+.card2{
+  position: relative;
+  top: 2rem;
+  left: 10px;
+ 
+
+}
+h4{
+  display: flex;
+  justify-content: end;
+  font:600 16px/18px 'Alfa Slab One';
+}
+@media screen and (max-width:1399px){}
+@media screen and (max-width:959px){
+  .container-xl{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media screen and (max-width:479px){}
