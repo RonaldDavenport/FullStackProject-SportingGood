@@ -79,11 +79,25 @@ ul li a{
 }
 .inventory{
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     position: relative;
     bottom: 45rem;
+    font-family: 'Scheherazade New', serif;
+    font-size: xx-small;
+    /* color: red; */
+  
    
+}
+
+.productDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: 'Scheherazade New', serif;
+  font-size: 20px;
+
 }
 .copyright{
   display: flex;
