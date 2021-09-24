@@ -32,3 +32,23 @@ $(document).ready(function () {
             $(this).find('.sm-menu').first().stop(true, true).slideUp(105)
         });
     });
+    const deleteOrder = async () => {
+        
+        const orderUrl = "http://localhost:3001/deleteOrder/";
+        const orderDelete = {
+            orderID: id,
+        };
+        const orderID = await fetch(orderUrl, {
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            },
+           
+        });
+        function deleteOrder(){
+            alert( "Order has been Deleted")
+        }
+    
+            addBtn.addEventListener("click", () => deleteOrder())
+    };    
